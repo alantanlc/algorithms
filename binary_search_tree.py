@@ -53,6 +53,8 @@ print()
 root.insert(6)
 root.insert(14)
 root.insert(3)
+root.insert(100)
+root.insert(1)
 root.PrintTree()
 print()
 
