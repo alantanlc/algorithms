@@ -8,24 +8,38 @@ def brute_force(arr, k):
         count += 1
   return count
 
-def count_pairs_with_diff_k(arr, k):
+def binary_search(arr, k):
+  start, end = 0, len(arr) - 1
+  while start <= end:
+    pos = (start + end) // 2
+    if k == arr[pos]:
+      return True
+    elif k < arr[pos]:
+      end = pos - 1
+    else:
+      start = pos + 1
+
+def sort_and_binary_search(arr, k):
+  arr.sort()
+  count = 0
+  for i in range(len(arr)):
+    if binary_search(arr[i+1:], arr[i]+k):
+      count += 1
+  return count 
+
+def hash_table(arr, k):
   seen = set()
   count = 0
-
   for i in arr:
-    lower = i - k
-    higher = i + k
-    
-    if lower in seen:
+    if i-k in seen:
       count += 1
-    if higher in seen:
+    if i+k in seen:
       count += 1
-
     seen.add(i)
-
   return count
 
 if __name__ == '__main__':
   pairs = [1, 7, 5, 9, 2, 12, 3]
   print(f'Brute Force: {brute_force(pairs, 2)}, Time: O(N^2), Space: O(N)')
-  print(f'Hash table: {count_pairs_with_diff_k(pairs, 2)}, Time: O(N), Space: O(N)')
+  print(f'Sort and Binary Search: {sort_and_binary_search(pairs, 2)}, Time: O(N log N), Space: O(N)')
+  print(f'Hash table: {hash_table(pairs, 2)}, Time: O(N), Space: O(N)')
