@@ -59,8 +59,27 @@ def hash_table_1():
       for pair in pairs:
         print(a, b, pair) 
 
+def hash_table_2():
+  # Description: Actually, once we have the map of all the (c, d) pairs, we can just use that directly. We don't need to generate the (a, b) pairs. Each (a, b) will already by in the map.
+  # Time: O(N^2)
+  # Space: O(N^2)?
+  n = 1000
+  map = {}
+  for c in range(1, n):
+    for d in range(1, n):
+      result = c**3 + d**3
+      if result not in map:
+        map[result] = [(c, d)]
+      else:
+        map[result].append((c, d))
+  for pairs in map.values():
+    for i in range(0, len(pairs)):
+      for j in range(i+1, len(pairs)):
+        print(pairs[i], pairs[j])
+
 if __name__ == '__main__':
   # print(brute_force_1())
   # print(brute_force_2())
   # print(brute_force_3())
-  print(hash_table_1())
+  # print(hash_table_1())
+  print(hash_table_2())
