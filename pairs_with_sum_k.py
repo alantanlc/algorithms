@@ -17,6 +17,6 @@ def find_pairs_with_sum_k(arr, k):
   return pairs
 
 if __name__ == '__main__':
-  arr = [1,2,3,4]
+  arr = [1,3,5,0,2,4]
   k = 5
   print(find_pairs_with_sum_k(arr, k))
