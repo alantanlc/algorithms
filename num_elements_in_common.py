@@ -1,6 +1,7 @@
 # Questino: Given two sorted arrays, find the number of elements in common. The arrays are the same length and each has all distinct elements.
 
 def find_num_common_elements(a, b):
+  # Description: Throw everything in A into a hash table. This will take O(N) time. Then, we just go through B and look up each element in the hash table. This look up (or search) os O(1), so our runtime is O(N).
   # Time: O(N)
   # Space: O(N)
 
