@@ -7,17 +7,19 @@ def compress(s):
   if not s:
     return s
 
-  compressed_string = ''
+  compressed_string = [] 
   count = 1 
   current = s[0] 
   for i, c in enumerate(s[1:]):
     if c != current:
-      compressed_string += current + str(count)
+      compressed_string.append(current + str(count))
       count = 1
       current = c
     else:
       count += 1
-  compressed_string += current + str(count)
+
+  compressed_string.append(current + str(count))
+  compressed_string = ''.join(compressed_string)
 
   return compressed_string if len(compressed_string) < len(s) else s
 
