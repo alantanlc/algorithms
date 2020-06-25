@@ -26,6 +26,14 @@ class Node:
 
     return head
 
+  def print(self):
+    n = self
+    output = []
+    while n:
+      output.append(str(n.data))
+      n = n.next
+    print('->'.join(output)) 
+
 # In this implementation, we don't have a LinkedList data structure. We access the linked list through a reference to the head Node of the linked list. When you implement the linked list this way, you need to be a bit careful. What is multiple objects need a reference to the linked list, and then the head of the linked list changes? Some objects might still be pointing to the old head.
 
 # We could, if we chose, implement a LinkedList class that wraps the Node class. This would essentially just have a single member variable: the head Node. This would largely resolve the earlier issue.
@@ -40,4 +48,11 @@ class LinkedList:
 
 # Additionally, if you implement this code in C, C++ or another language that requires the developer to do memory management, you should consider if the removed node should be deallocated.
 
+if __name__ == '__main__':
+  n = Node(0)
+  for i in range(1,5):
+    n.append_to_tail(i)
+  n.print()
 
+  n.delete_node(n, 3)
+  n.print()
