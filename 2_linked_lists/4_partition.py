@@ -1,4 +1,4 @@
-# Question: Writw code to partition a linked list around a value x, such that all nodes less than x come before all nodes greater than or equal to x. If x is contained within the list, the values of x only need to be after the elements less than x (see below). The partition element x can appear anywhere in the "right partition"; it does not need to appear between the left and right partitions.
+# Question: Write code to partition a linked list around a value x, such that all nodes less than x come before all nodes greater than or equal to x. If x is contained within the list, the values of x only need to be after the elements less than x (see below). The partition element x can appear anywhere in the "right partition"; it does not need to appear between the left and right partitions.
 
 class LinkedListNode(object):
     
@@ -41,7 +41,7 @@ def partition(node: LinkedListNode, x: int) -> LinkedListNode:
         node = nxt
     tail.next = None
 
-    # The head has changed, so we need to return it to the user.
+    # The head has changed, so we need to return it to the user
     return head
 
 
@@ -54,6 +54,9 @@ def main():
     head.add(LinkedListNode(2))
     head.add(LinkedListNode(1))
     head.print()
+
+    rv = partition(head, 5)
+    rv.print()
 
 
 if __name__ == "__main__":
