@@ -1,63 +1,75 @@
 # Question: Write code to partition a linked list around a value x, such that all nodes less than x come before all nodes greater than or equal to x. If x is contained within the list, the values of x only need to be after the elements less than x (see below). The partition element x can appear anywhere in the "right partition"; it does not need to appear between the left and right partitions.
 
-class LinkedListNode(object):
-    
-    def __init__(self, data: int):
-        self.data = data
+
+class Node(object):
+
+    def __init__(self, data: int) -> None:
         self.next = None
+        self.data = data
 
-    def add(self, node):
-        if node is None:
-            return
-
-        nxt = self
-        while nxt.next is not None:
-            nxt = nxt.next
-        nxt.next = node
+    def append_to_tail(self, d: int) -> None:
+        end = Node(d)
+        n = self
+        while n.next is not None:
+            n = n.next
+        n.next = end
 
     def print(self):
         output = [str(self.data)]
-        nxt = self.next
-        while nxt is not None:
-            output.append(f'->{nxt.data}')
-            nxt = nxt.next
+        n = self.next
+        while n is not None:
+            output.append(f'->{n.data}')
+            n = n.next
         print(''.join(output))
 
 
-def partition(node: LinkedListNode, x: int) -> LinkedListNode:
-    head = node
-    tail = node
+def partition(node: Node, x: int) -> Node:
+    before_start = None
+    before_end = None
+    after_start = None
+    after_end = None
 
+    # Partition list
     while node is not None:
         nxt = node.next
+        node.next = None
         if node.data < x:
-            # Insert node at head
-            node.next = head
-            head = node
+            # Insert node into end of before list
+            if before_start is None:
+                before_start = node
+                before_end = before_start
+            else:
+                before_end.next = node
+                before_end = node
         else:
-            # Insert node at tail
-            tail.next = node
-            tail = node
-        node = nxt
-    tail.next = None
+            if after_start is None:
+                after_start = node
+                after_end = after_start
+            else:
+                after_end.next = node
+                after_end = node
+        node = nt
 
-    # The head has changed, so we need to return it to the user
-    return head
+    if before_start is None:
+        return after_start
 
+    # Merge before list and after list
+    before_end.next = after_start
+    return before_start
 
 def main():
-    head = LinkedListNode(3)
-    head.add(LinkedListNode(5))
-    head.add(LinkedListNode(8))
-    head.add(LinkedListNode(5))
-    head.add(LinkedListNode(10))
-    head.add(LinkedListNode(2))
-    head.add(LinkedListNode(1))
-    head.print()
+    ll = Node(3)
+    ll.append_to_tail(5)
+    ll.append_to_tail(8)
+    ll.append_to_tail(5)
+    ll.append_to_tail(10)
+    ll.append_to_tail(2)
+    ll.append_to_tail(1)
+    ll.print()
 
-    rv = partition(head, 5)
-    rv.print()
+    result = partition(ll, 5)
+    result.print()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
